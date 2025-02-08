@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ![RiyalScript Logo](docs/RiyalScript_Logo.png)
 
+=======
+# RiyalScript
+>>>>>>> ec1fbf3 (Your commit message)
 RiyalScript: A High-Performance, Finance-Oriented Programming Language
 Overview
 RiyalScript is a high-performance, statically-typed programming language inspired by JavaScript and C++, designed for financial applications, algorithmic trading, and data-driven business solutions. It blends the simplicity and flexibility of JavaScript with the speed and efficiency of C++, making it an ideal choice for developers building high-performance trading platforms, fintech applications, and business automation tools.
@@ -26,6 +30,7 @@ Supports API calls to web services, databases, and cloud-based financial tools.
 Supports classes, inheritance, and polymorphism (like C++).
 Supports arrow functions and async/await (like JavaScript).
 Allows functional programming features, such as higher-order functions and immutable structures.
+<<<<<<< HEAD
 
 ## EXAMPLES
 // Convert Saudi Riyal to USD with a real-time exchange rate
@@ -118,3 +123,5 @@ print("📱 " + product2.name + " Final Price: SAR " + total2.⚡(2));
 
 --------------------------------------------------------------------
 
+=======
+>>>>>>> ec1fbf3 (Your commit message)
