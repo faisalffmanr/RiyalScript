@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ![RiyalScript Logo](docs/RiyalScript_Logo.png)
 
 =======
