@@ -116,7 +116,8 @@ print(product1.name + " Final Price: SAR " + total1.⚡(2));
 print(product2.name + " Final Price: SAR " + total2.⚡(2));
 
 ------------------------------------------------------------------------------------------
-For hybrid JS and C++ examples
+For hybrid RS(RiyalScript) and C++ examples 
+this is Just because I want to see C++ with RS(RiyalScript)...
 
 #include <iostream>
 #include <vector>
