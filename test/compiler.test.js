@@ -1,9 +1,16 @@
+import { execSync } from 'child_process';
 import { describe, it } from 'node:test';
-import { deepEqual } from 'node:assert/strict';
+import { deepEqual, strictEqual } from 'node:assert/strict';
 
-describe('Compiler', () => {
-    it('should work', () => {
+describe('RiyalScript Test', () => {
+    it('should assert 1 === 1', () => {
         deepEqual(1, 1);
     });
 });
 
+describe('RiyalScript Hello Test', () => {
+    it('this will print: "Hellooo, RiyalScript!"', () => {
+        const output = execSync('node src/RiyalScript.js', { encoding: 'utf8' }).trim();
+        strictEqual(output, "Hellooo, RiyalScript!");
+    });
+});
