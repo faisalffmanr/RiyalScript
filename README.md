@@ -2,7 +2,7 @@
 ![RiyalScript Logo](docs/RiyalScript_Logo.png)
 
 RiyalScript
-Overview
+
 RiyalScript is a high-performance, statically-typed programming language inspired by JavaScript and C++, designed for financial applications, algorithmic trading, and data-driven business solutions. It blends the simplicity and flexibility of JavaScript with the speed and efficiency of C++, making it ideal for developers building high-performance trading platforms, fintech applications, and business automation tools.
 
 The name "RiyalScript" comes from the Saudi Riyal (SAR), symbolizing precision, stability, and financial focus.
@@ -11,11 +11,7 @@ Features
 JavaScript-Like Syntax, C++-Like Performance
 Familiar syntax for JavaScript and C++ developers.
 Strongly typed, but with type inference, similar to TypeScript and modern C++.
-<<<<<<< HEAD
-Uses curly braces {} and semicolons; making it easy for C++ and JS developers to pick up.
-=======
 Uses curly braces {} and semicolons ;, making it easy for C++ and JS developers to pick up.
->>>>>>> 50fe0af (Updated RiyalScript.js to print hello message and fixed test)
 Finance & Business-Oriented
 Built-in financial types like Currency, Decimal, and InterestRate, avoiding floating-point inaccuracies.
 Optimized for real-time trading algorithms, large financial datasets, and complex business calculations.
@@ -23,22 +19,16 @@ Low-latency execution, making it ideal for high-frequency trading (HFT) and auto
 High-Performance & Compiled
 Compiled to optimized bytecode, making it faster than interpreted languages like JavaScript or Python.
 Memory-efficient with both manual and automatic memory management (inspired by C++).
-<<<<<<< HEAD
-It supports multi-threading and concurrency, which are essential for real-time financial applications.
-Interoperability with C++ and JavaScript
-It can be embedded in C++ applications for performance-critical tasks.
-It can interact with JavaScript via WebAssembly (WASM), making it suitable for web-based fintech solutions.
-=======
 Supports multi-threading and concurrency, essential for real-time financial applications.
 Interoperability with C++ and JavaScript
 Can be embedded in C++ applications for performance-critical tasks.
 Can interact with JavaScript via WebAssembly (WASM), making it suitable for web-based fintech solutions.
->>>>>>> 50fe0af (Updated RiyalScript.js to print hello message and fixed test)
 Supports API calls to web services, databases, and cloud-based financial tools.
 Object-Oriented & Functional Hybrid
 Supports classes, inheritance, and polymorphism (like C++).
 Supports arrow functions and async/await (like JavaScript).
 Allows functional programming features, such as higher-order functions and immutable structures.
+
 
 Examples
 ------------------------------------------------------------------------------------------
@@ -126,12 +116,6 @@ print(product1.name + " Final Price: SAR " + total1.⚡(2));
 print(product2.name + " Final Price: SAR " + total2.⚡(2));
 
 ------------------------------------------------------------------------------------------
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 50fe0af (Updated RiyalScript.js to print hello message and fixed test)
 
 
 
