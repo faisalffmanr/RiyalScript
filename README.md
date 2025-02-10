@@ -116,6 +116,101 @@ print(product1.name + " Final Price: SAR " + total1.⚡(2));
 print(product2.name + " Final Price: SAR " + total2.⚡(2));
 
 ------------------------------------------------------------------------------------------
+For hybrid JS and C++ examples
 
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <thread>
+
+// RiyalScript 
+extern "C" {
+    double convert_currency(double amount, double rate) {
+        return amount * rate;  
+    }
+
+    double simple_moving_average(std::vector<double> prices, int period) {
+        double sum = 0.0;
+        for (int i = 0; i < period; i++) {
+            sum += prices[i];
+        }
+        return sum / period;  // Division using C++
+    }
+
+    double calculate_monthly_payment(double principal, double rate, int years) {
+        double monthly_rate = rate / 12 / 100;
+        int months = years * 12;
+        return (principal * monthly_rate) / (1 - pow(1 + monthly_rate, -months));
+    }
+
+    void check_stock(std::string ticker, double price, double high, double low) {
+        if (price > high) {
+            std::cout << "🚀 " << ticker << " is above SAR " << high << "! Current Price: SAR " << price << std::endl;
+        } else if (price < low) {
+            std::cout << "📉 " << ticker << " is below SAR " << low << "! Current Price: SAR " << price << std::endl;
+        } else {
+            std::cout << "📊 " << ticker << " is stable at SAR " << price << std::endl;
+        }
+    }
+
+    double calculate_total(double price, double tax_rate) {
+        return price + (price * tax_rate / 100);
+    }
+}
+
+// RiyalScript Section (Simulated as Embedded Script)
+const char* riyal_script = R"(
+    fn convert_currency(amount: Decimal, rate: Decimal) -> Decimal {
+        return amount ⨉ rate; 
+    }
+
+    let sar_amount = 1000.00;
+    let exchange_rate = 0.27;
+    let usd_amount = convert_currency(sar_amount, exchange_rate);
+    print("1000 SAR is equivalent to: $" + usd_amount.⚡(2));
+)";
+
+// Main C++ function
+int main() {
+    // Currency Conversion Example
+    double sar_amount = 1000.00;
+    double exchange_rate = 0.27;
+    double usd_amount = convert_currency(sar_amount, exchange_rate);
+    std::cout << "1000 SAR is equivalent to: $" << usd_amount << std::endl;
+
+    // Simple Moving Average Example
+    std::vector<double> stock_prices = {120.5, 121.0, 119.8, 122.3, 123.5};
+    double sma = simple_moving_average(stock_prices, 5);
+    std::cout << "5-day SMA: " << sma << std::endl;
+
+    // Loan Simulation Using Threads
+    std::thread loan1([]() {
+        double result = calculate_monthly_payment(50000, 3.5, 15);
+        std::cout << "Loan 1 Monthly Payment: SAR " << result << std::endl;
+    });
+
+    std::thread loan2([]() {
+        double result = calculate_monthly_payment(100000, 4.2, 30);
+        std::cout << "Loan 2 Monthly Payment: SAR " << result << std::endl;
+    });
+
+    loan1.join();
+    loan2.join();
+
+    // Stock Price Alert System
+    check_stock("TADAWUL:2020", 110.5, 120.0, 100.0);
+    check_stock("TADAWUL:1120", 45.2, 50.0, 40.0);
+
+    // Tax Calculation
+    double total1 = calculate_total(5000.00, 15.0);
+    double total2 = calculate_total(3000.00, 10.0);
+    std::cout << "Laptop Final Price: SAR " << total1 << std::endl;
+    std::cout << "Smartphone Final Price: SAR " << total2 << std::endl;
+
+    // Simulating RiyalScript Execution
+    std::cout << "Executing RiyalScript Code:\n" << riyal_script << std::endl;
+
+    return 0;
+}
 
 
