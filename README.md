@@ -1,4 +1,4 @@
-RiyalScript
+# RiyalScript
 
 RiyalScript is a high-performance, statically-typed programming language inspired by JavaScript and C++, designed for financial applications, algorithmic trading, and data-driven business solutions. It blends the simplicity and flexibility of JavaScript with the speed and efficiency of C++, making it ideal for developers building high-performance trading platforms, fintech applications, and business automation tools.
 
