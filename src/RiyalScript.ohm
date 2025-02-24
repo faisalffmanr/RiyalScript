@@ -1,0 +1,49 @@
+RiyalScript {
+  Program = Statement* Exp
+
+  Statement = FuncDecl | VarDecl | AssignStmt
+
+  FuncDecl = "func" id "[" Params "]" "(" ExpList ")" "end"
+  Params = ListOf<id, ",">
+  ExpList = NonemptyListOf<Exp, ";">
+
+  VarDecl = "let" id "=" Exp
+  AssignStmt = id "=" Exp
+
+  Exp = Exp1 "if" Exp "else" Exp  -- Conditional expression
+      | Exp1  
+
+  Exp1 = Exp1 ("+" | "-") Exp2  -- Addition and subtraction
+       | Exp2  
+
+  Exp2 = Exp2 ("*" | "/" | "%") Exp3  -- Multiplication, division, modulus
+       | Exp3  
+
+  Exp3 = Exp3 "!"  -- Postfix factorial
+       | "-" Exp4  -- Unary negation
+       | Exp4  
+
+  Exp4 = num  -- Numeric literals
+       | str  -- String literals
+       | Call  -- Function calls
+       | id  -- Identifiers
+       | "(" Exp ")"  -- Parentheses for grouping  
+
+  Call = id "[" Args "]"
+  Args = ListOf<Exp, ",">
+
+  id = ~keyword (letter | "@" | "_") idchar*
+  idchar = alnum | "_" | "@" | "$"
+
+  num = digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?  -- Numeric literals (integer, fractional, exponent)
+
+  str = "\"" strchar* "\""  
+  strchar = ~("\\" | "\"") any  -- Direct characters
+          | "\\" escape  -- Escape sequences
+  escape = "\"" | "'" | "\\" | "n" | "u" "{" hexes "}"
+  hexes = hexDigit hexDigit? hexDigit? hexDigit? hexDigit? hexDigit?
+
+  keyword = "func" | "if" | "else" | "end" | "let"
+
+  space += "--" (~"\n" any)*  -- Single-line comments
+}

@@ -30,6 +30,7 @@ Supports arrow functions and async/await (like JavaScript).
 Allows functional programming features, such as higher-order functions and immutable structures.
 
 
+<<<<<<< HEAD
 Examples
 ------------------------------------------------------------------------------------------
 Convert Saudi Riyal to USD with a real-time exchange rate
@@ -213,5 +214,9 @@ int main() {
 
     return 0;
 }
+=======
+
+
+>>>>>>> 366d24b (modifications to hw2)
 
 
