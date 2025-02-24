@@ -41,7 +41,7 @@ RiyalScript {
   strchar = ~("\\" | "\"") any  -- Direct characters
           | "\\" escape  -- Escape sequences
   escape = "\"" | "'" | "\\" | "n" | "u" "{" hexes "}"
-  hexes = hexDigit hexDigit? hexDigit? hexDigit? hexDigit? hexDigit?
+  
 
   keyword = "func" | "if" | "else" | "end" | "let"
 
