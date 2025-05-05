@@ -1,4 +1,4 @@
-/* docs/style.css */
+
 
 body {
   font-family: system-ui, sans-serif;
@@ -10,10 +10,17 @@ body {
 }
 
 header {
-  background: #004680;
+  background: #1ca261; 
   color: white;
   padding: 2rem 1.5rem;
   text-align: center;
+}
+
+header img {
+  height: 100px;
+  max-width: 200px;
+  margin-bottom: 1rem;
+  border-radius: 12px;
 }
 
 header h1 {
@@ -28,10 +35,10 @@ section {
 }
 
 h2 {
-  border-bottom: 2px solid #004680;
+  border-bottom: 2px solid #1ca261;
   padding-bottom: 0.4rem;
   margin-bottom: 1rem;
-  color: #004680;
+  color: #1ca261;
 }
 
 pre {
@@ -52,7 +59,7 @@ footer {
 }
 
 footer a {
-  color: #004680;
+  color: #1ca261;
   text-decoration: none;
 }
 
@@ -67,5 +74,10 @@ footer a:hover {
 
   section {
     padding: 1.5rem 1rem;
+  }
+
+  header img {
+    height: 70px;
+    max-width: 140px;
   }
 }
