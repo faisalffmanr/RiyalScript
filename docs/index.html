@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RiyalScript Language</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -22,35 +23,20 @@
     <h2>Example Programs</h2>
     <pre><code>let gain = 1200
 let cost = 1000
-let roi = (gain - cost) / cost
-print(roi)</code></pre>
+let roi = (gain - cost) / cost * 100</code></pre>
 
-    <pre><code>func add(a, b)
-  return a + b
-end
+    <pre><code>func add[a, b] (a + b) end
+let result = add[5, 7]</code></pre>
 
-print(add(5, 7))</code></pre>
-
-    <pre><code>func factorial(n)
-  if n <= 1
-    return 1
-  else
-    return n * factorial(n - 1)
-  end
-end
-
-print(factorial(5))</code></pre>
+    <pre><code>func factorial[n] (if n <= 1 1 else n * factorial[n - 1]) end
+let result = factorial[5]</code></pre>
 
     <pre><code>let price = 450.75
 let shares = 20
-let total_value = price * shares
-print(total_value)</code></pre>
+let total_value = price * shares</code></pre>
 
-    <pre><code>func isEven(n)
-  return n % 2 == 0
-end
-
-print(isEven(10))</code></pre>
+    <pre><code>func isEven[n] (n % 2 == 0) end
+let result = isEven[10]</code></pre>
   </section>
 
   <section id="bios">

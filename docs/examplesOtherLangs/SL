@@ -1,0 +1,6 @@
+let entry = 80.0
+let price = 72.5
+let stop = entry * 0.9
+let status = "Sell Now" if price < stop else "Hold"
+
+/* Stop Loss order*/

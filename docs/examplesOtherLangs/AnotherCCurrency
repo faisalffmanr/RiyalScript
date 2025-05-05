@@ -1,0 +1,6 @@
+const sar = 1000;
+const usdRate = 0.27;
+const usd = sar * usdRate;
+console.log("USD:", usd);
+
+/* since this language is named after Saudi's currency I want to include more currency conversions*/

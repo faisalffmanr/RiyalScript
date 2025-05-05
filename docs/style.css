@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background: #f9f9f9;
+    color: #333;
+  }
+  
+  header {
+    background: #004080;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  section {
+    padding: 2rem;
+  }
+  
+  h1, h2 {
+    margin-bottom: 1rem;
+  }
+  
+  pre {
+    background: #eee;
+    padding: 1rem;
+    overflow-x: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background: #ddd;
+    margin-top: 2rem;
+  }
+  
+  a {
+    color: #004080;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  #examples pre {
+    margin-bottom: 1.5rem;
+  }
+  
+  #bios {
+    background-color: #eef;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+  

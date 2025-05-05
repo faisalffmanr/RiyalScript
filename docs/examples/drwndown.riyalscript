@@ -1,0 +1,3 @@
+func maxDrawdown[a, b, c] (1 - (c / a)) end
+
+let maxDrop = maxDrawdown(200, 180, 150)

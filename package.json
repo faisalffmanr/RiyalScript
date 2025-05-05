@@ -1,7 +1,7 @@
 {
-  "name": "riyalscript",
+  "name": "RiyalScript",
   "version": "1.0.0",
-  "description": "RiyalScript: A High-Performance, Finance-Oriented Programming Language Overview RiyalScript is a high-performance, statically-typed programming language inspired by JavaScript and C++, designed for financial applications, algorithmic trading, and data-driven business solutions. It blends the simplicity and flexibility of JavaScript with the speed and efficiency of C++, making it an ideal choice for developers building high-performance trading platforms, fintech applications, and business automation tools.",
+  "description": "RiyalScript: A High-Performance, Finance-Oriented Programming Language...",
   "type": "module",
   "main": "src/RiyalScript.js",
   "scripts": {
@@ -13,6 +13,33 @@
   "devDependencies": {
     "c8": "^10.1.3",
     "mocha": "^11.1.0"
+  },
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "RiyalScript",
+        "aliases": [
+          "RiyalScript"
+        ],
+        "extensions": [
+          ".RiyalScript"
+        ],
+        "configuration": "./syntaxes/RiyalScript-language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "RiyalScript",
+        "scopeName": "source.RiyalScript",
+        "path": "./syntaxes/RiyalScript.tmLanguage.json"
+      }
+    ]
+  },
+  "dependencies": {
+    "graph-stringify": "^1.1.0",
+    "ohm-js": "^17.1.0"
   }
 }
-  

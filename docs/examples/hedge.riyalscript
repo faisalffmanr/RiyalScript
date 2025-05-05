@@ -1,0 +1,3 @@
+let last = 48.0
+let current = 41.0
+let shouldHedge = "Buy put contract" if current < (last * 0.9) else "Hold the Stock"

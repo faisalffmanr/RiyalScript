@@ -4,4 +4,76 @@ RiyalScript is a high-performance, statically-typed programming language inspire
 
 The name "RiyalScript" comes from the Saudi Riyal (SAR), symbolizing precision, stability, and financial focus.
 
-Features JavaScript-Like Syntax, C++-Like Performance Familiar syntax for JavaScript and C++ developers. Strongly typed, but with type inference, similar to TypeScript and modern C++. Uses curly braces {} and semicolons ;, making it easy for C++ and JS developers to pick up. Finance & Business-Oriented Built-in financial types like Currency, Decimal, and InterestRate, avoiding floating-point inaccuracies. Optimized for real-time trading algorithms, large financial datasets, and complex business calculations. Low-latency execution, making it ideal for high-frequency trading (HFT) and automated decision-making. High-Performance & Compiled Compiled to optimized bytecode, making it faster than interpreted languages like JavaScript or Python. Memory-efficient with both manual and automatic memory management (inspired by C++). Supports multi-threading and concurrency, essential for real-time financial applications. Interoperability with C++ and JavaScript Can be embedded in C++ applications for performance-critical tasks. Can interact with JavaScript via WebAssembly (WASM), making it suitable for web-based fintech solutions. Supports API calls to web services, databases, and cloud-based financial tools. Object-Oriented & Functional Hybrid Supports classes, inheritance, and polymorphism (like C++). Supports arrow functions and async/await (like JavaScript). Allows functional programming features, such as higher-order functions and immutable structures.
+## Features
+
+### JavaScript-Like Syntax, C++-Like Performance
+- Familiar syntax for JavaScript and C++ developers
+- Strongly typed, with type inference (similar to TypeScript)
+- Uses semicolon-based and expression-based code blocks for clarity
+
+### Finance & Business-Oriented
+- Built-in financial types: `Currency`, `Decimal`, `InterestRate`
+- Avoids floating-point inaccuracies common in other languages
+- Optimized for large financial datasets and real-time trading logic
+
+### High-Performance & Compiled
+- Compiled to optimized bytecode (not interpreted)
+- Low-latency, memory-efficient design for HFT and automation
+- Supports concurrency and multi-threading
+
+### C++ and JavaScript
+- C++ native bindings for high-performance modules
+- JavaScript/WebAssembly (WASM) integration for browser and server
+- Easy API access for cloud-based financial services
+
+### Object-Oriented & Functional Hybrid
+- Classes, inheritance, and polymorphism (C++-style OOP)
+- Supports arrow functions, closures, and async/await
+- Functional programming: higher-order functions, immutability
+
+---
+
+## Static Checks (Performed by Analyzer)
+- Use of undeclared variables or functions
+- Duplicate declarations in the same scope
+- Function call arity (wrong number of arguments)
+- Assignment to undeclared variables
+- Type-aware expression validation (e.g. "hello" + 2)
+- Function and variable name shadowing errors
+
+---
+
+## How to Run
+
+To run a `.riyalscript` file:
+```bash
+node src/riyalscript.js examples/add.riyalscript run
+```
+
+To generate other output stages:
+```bash
+node src/riyalscript.js <file> parsed     # Just check syntax
+node src/riyalscript.js <file> analyzed   # output the AST
+node src/riyalscript.js <file> optimized  # Optimized AST
+node src/riyalscript.js <file> js         # generated JavaScript
+```
+
+To run all tests:
+```bash
+npm test
+```
+(Ensure your `package.json` includes: `"test": "node --test"`)
+
+---
+
+
+##  Website
+Check out the RiyalScript showcase site:
+[https://faisalffmanr.github.io/riyalscript](https://faisalffmanr.github.io/riyalscript)
+
+---
+
+##  
+**Faisal Alhogail**  
+Senior Computer Science major at LMU.  
+Interested in compiler theory, financial systems, and high-performance language design.

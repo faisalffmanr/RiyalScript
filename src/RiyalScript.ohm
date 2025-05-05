@@ -1,49 +1,63 @@
 RiyalScript {
-  Program = Statement* Exp
+  Program = Statement+
 
   Statement = FuncDecl | VarDecl | AssignStmt
 
-  FuncDecl = "func" id "[" Params "]" "(" ExpList ")" "end"
+  FuncDecl = "func" id "[" Params "]" "(" ExpBlock ")" "end"
   Params = ListOf<id, ",">
-  ExpList = NonemptyListOf<Exp, ";">
 
-  VarDecl = "let" id "=" Exp
-  AssignStmt = id "=" Exp
+  ExpBlock = NonemptyListOf<TopExpr, ";">
+  TopExpr = IfExpr | Expression
 
-  Exp = Exp1 "if" Exp "else" Exp  -- Conditional expression
-      | Exp1  
+  VarDecl = "let" id "=" Expression
+  AssignStmt = id "=" Expression
 
-  Exp1 = Exp1 ("+" | "-") Exp2  -- Addition and subtraction
-       | Exp2  
+  Expression = IfExpr | AddExpr
 
-  Exp2 = Exp2 ("*" | "/" | "%") Exp3  -- Multiplication, division, modulus
-       | Exp3  
+  IfExpr = "if" Expression Expression "else" Expression
 
-  Exp3 = Exp3 "!"  -- Postfix factorial
-       | "-" Exp4  -- Unary negation
-       | Exp4  
+  AddExpr = AddChain | MulExpr
+  AddChain = AddExpr ("+" | "-") MulExpr
 
-  Exp4 = num  -- Numeric literals
-       | str  -- String literals
-       | Call  -- Function calls
-       | id  -- Identifiers
-       | "(" Exp ")"  -- Parentheses for grouping  
+  MulExpr = MulChain | UnaryExpr
+  MulChain = MulExpr ("*" | "/" | "%") UnaryExpr
+
+  UnaryExpr = Negate | PostfixExpr
+  Negate = "-" PrimaryExpr
+
+  PostfixExpr = PostfixChain | PrimaryExpr
+  PostfixChain = PostfixExpr "!"
+
+  PrimaryExpr =
+      IfExpr
+    | num
+    | str
+    | Call
+    | id
+    | Grouped
+
+  Grouped = "(" Expression ")"
 
   Call = id "[" Args "]"
-  Args = ListOf<Exp, ",">
+  Args = ListOf<Expression, ",">
 
   id = ~keyword (letter | "@" | "_") idchar*
   idchar = alnum | "_" | "@" | "$"
 
-  num = digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?  -- Numeric literals (integer, fractional, exponent)
+  num = digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
 
-  str = "\"" strchar* "\""  
-  strchar = ~("\\" | "\"") any  -- Direct characters
-          | "\\" escape  -- Escape sequences
-  escape = "\"" | "'" | "\\" | "n" | "u" "{" hexes "}"
-  
+  str = "\"" strchar* "\""
+  strchar = directChar | escapeChar
+  directChar = ~("\\" | "\"") any
+  escapeChar = "\\" escape
+
+  escape = "\"" | "'" | "\\" | "n" | unicodeEscape
+  unicodeEscape = "u" "{" hexes "}"
+  hexes = hex+
+  hex = digit | "a".."f" | "A".."F"
 
   keyword = "func" | "if" | "else" | "end" | "let"
 
-  space += "--" (~"\n" any)*  -- Single-line comments
+  comment = "\\\\" (~"\n" any)*
+  space += " " | "\t" | "\n" | comment
 }

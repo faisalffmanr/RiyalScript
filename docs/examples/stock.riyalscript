@@ -1,0 +1,3 @@
+let shares = 100
+let totalCost = 2750
+let breakEven = totalCost / shares

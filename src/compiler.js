@@ -1,30 +1,37 @@
-import { describe, it } from "node:test"
-import assert from "node:assert/strict"
-import compile from "../src/compiler.js"
+import { parse } from "./parser.js"
+import analyze from "./analyzer.js"
+import optimize from "./optimizer.js"
+import generate from "./generator.js"
+import run from "./run.js"
 
-const sampleProgram = "print(0);"
+export default function compile(source, outputType) {
+  if (!["parsed", "analyzed", "optimized", "js", "run"].includes(outputType)) {
+    throw new Error("Unknown output type")
+  }
 
-describe("The compiler", () => {
-  it("throws when the output type is missing", () => {
-    assert.throws(() => compile(sampleProgram), /Unknown output type/)
-  })
-  it("throws when the output type is unknown", () => {
-    assert.throws(() => compile(sampleProgram, "no such type"), /Unknown output type/)
-  })
-  it("accepts the parsed option", () => {
-    const compiled = compile(sampleProgram, "parsed")
-    assert(compiled.startsWith("Syntax is ok"))
-  })
-  it("accepts the analyzed option", () => {
-    const compiled = compile(sampleProgram, "analyzed")
-    assert(compiled.kind === "Program")
-  })
-  it("accepts the optimized option", () => {
-    const compiled = compile(sampleProgram, "optimized")
-    assert(compiled.kind === "Program")
-  })
-  it("generates js code when given the js option", () => {
-    const compiled = compile(sampleProgram, "js")
-    assert(compiled.startsWith("console.log(0)"))
-  })
-})
+  const match = parse(source)
+
+  if (outputType === "parsed") {
+    return "Syntax is ok"
+  }
+
+  const analyzed = analyze(match)
+
+  if (outputType === "analyzed") {
+    return analyzed
+  }
+
+  if (outputType === "run") {
+    return run(analyzed)
+  }
+
+  const optimized = optimize(analyzed)
+
+  if (outputType === "optimized") {
+    return optimized
+  }
+
+  if (outputType === "js") {
+    return generate(optimized)
+  }
+}
