@@ -1,60 +1,71 @@
+/* docs/style.css */
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    background: #f9f9f9;
-    color: #333;
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  color: #222;
+  line-height: 1.6;
+}
+
+header {
+  background: #004680;
+  color: white;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+section {
+  padding: 2rem 1.5rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+h2 {
+  border-bottom: 2px solid #004680;
+  padding-bottom: 0.4rem;
+  margin-bottom: 1rem;
+  color: #004680;
+}
+
+pre {
+  background: #272822;
+  color: #f8f8f2;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+footer {
+  background: #eee;
+  text-align: center;
+  padding: 1.25rem;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #004680;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
   }
-  
-  header {
-    background: #004080;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-  
+
   section {
-    padding: 2rem;
+    padding: 1.5rem 1rem;
   }
-  
-  h1, h2 {
-    margin-bottom: 1rem;
-  }
-  
-  pre {
-    background: #eee;
-    padding: 1rem;
-    overflow-x: auto;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  
-  footer {
-    text-align: center;
-    padding: 1rem;
-    background: #ddd;
-    margin-top: 2rem;
-  }
-  
-  a {
-    color: #004080;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  #examples pre {
-    margin-bottom: 1.5rem;
-  }
-  
-  #bios {
-    background-color: #eef;
-    border-radius: 5px;
-    padding: 1rem;
-    margin-top: 2rem;
-  }
-  
+}
