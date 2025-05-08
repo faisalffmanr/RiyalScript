@@ -50,22 +50,16 @@ To run a `.riyalscript` file:
 node src/riyalscript.js examples/add.riyalscript run
 ```
 
-To generate other output stages:
-```bash
-node src/riyalscript.js <file> parsed     # Just check syntax
-node src/riyalscript.js <file> analyzed   # output the AST
-node src/riyalscript.js <file> optimized  # Optimized AST
-node src/riyalscript.js <file> js         # generated JavaScript
-```
+
 
 To run all tests:
 ```bash
 npm test
 ```
-(Ensure your `package.json` includes: `"test": "node --test"`)
+
 
 ---
-
+used node --test test/grammar.test.js for grammer
 
 ##  Website
 Check out the RiyalScript showcase site:
