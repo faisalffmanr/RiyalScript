@@ -1,3 +1,5 @@
+//this was me trying things don't bother looking yet
+
 import * as fs from "node:fs/promises";
 import * as ohm from "ohm-js";
 

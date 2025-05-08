@@ -1,30 +1,21 @@
 import { describe, it } from "node:test"
 import assert from "assert"
-import * as ohm from "ohm-js"
-import fs from "fs"
-import path from "path"
-
-// Load RiyalScript grammar file, and i'm using the template from your website for HW2 instructions page
-const grammarSource = fs.readFileSync(
-  path.join("src", "riyalscript.ohm"),
-  "utf-8"
-)
-
-const RiyalGrammar = ohm.grammar(grammarSource)
+import RiyalGrammar from "../src/RiyalScript.js"
 
 function matches(source) {
   return RiyalGrammar.match(source).succeeded()
 }
 
-// A valid RiyalScript program using every major feature (from HW2 Exercise 2)
-const everythingProgram = `
+const program = {
+  good: [
+    String.raw`
 func calc(x, y)
   x + y * 2;
   "done"
 end
 
 func f()
-  "hello";
+  "hello y'all";
   5 * 3 - 1 ** 3;
   val if cond else alt;
   -8 + 3;
@@ -33,25 +24,27 @@ func f()
 end
 
 calc[9, 10]
-`
-
-// A few invalid programs for negative tests
-const badPrograms = [
-  `func (x) x + 1; end`,            // missing name
-  `func f(x x) x + x; end`,         // duplicate param name or bad syntax
-  `5 + ;`,                          // incomplete expression
-  `func g() x + 1 end`,            // missing semicolon
-  `func h() "unterminated; end`,   // unterminated string
-]
+    `
+  ],
+  bad: [
+    `func (x) x + 1; end`,            
+    `func f(x x) x + x; end`,         
+    `5 + ;`,                          
+    `func g() x + 1 end`,            
+    `func h() "unterminated; end`,
+  ]
+}
 
 describe("RiyalScript grammar", () => {
-  it("accepts the everything-program", () => {
-    assert.ok(matches(everythingProgram))
-  })
+  for (const source of program.good) {
+    it(`accepts: ${JSON.stringify(source)}`, () => {
+      assert.ok(matches(source))
+    })
+  }
 
-  for (const bad of badPrograms) {
-    it(`rejects: ${JSON.stringify(bad)}`, () => {
-      assert.ok(!matches(bad))
+  for (const source of program.bad) {
+    it(`rejects: ${JSON.stringify(source)}`, () => {
+      assert.ok(!matches(source))
     })
   }
 })
