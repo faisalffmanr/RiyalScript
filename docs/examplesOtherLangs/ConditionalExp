@@ -1,4 +1,0 @@
-let score = 800
-let status = "Approved" if score >= 700 else "Denied"
-
-/*Swift example, as I want to exapand to more langs*/

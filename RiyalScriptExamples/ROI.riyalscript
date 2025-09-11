@@ -1,3 +1,0 @@
-let gain = 1200
-let cost = 1000
-let roi = (gain - cost) / cost * 100

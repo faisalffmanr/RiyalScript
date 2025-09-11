@@ -1,4 +1,0 @@
-let currentPrice = 125.0
-let trailPercent = 0.05
-let stopPrice = currentPrice * (1 - trailPercent)
-

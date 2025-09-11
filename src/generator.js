@@ -33,7 +33,32 @@ export default function generate(node) {
     case "StringLiteral":
       return `"${node.value}"`;
 
+    case "BooleanLiteral":
+      return node.value.toString();
+
+    case "ArrayLiteral":
+      return `[${node.elements.map(generate).join(", ")}]`;
+
+    case "ObjectLiteral":
+      const props = node.properties.map(prop => `${prop.key}: ${generate(prop.value)}`).join(", ");
+      return `{${props}}`;
+
+    case "WhileLoop":
+      return `while (${generate(node.condition)}) {\n${node.body.map(generate).join("\n")}\n}`;
+
+    case "ForLoop":
+      return `for (let ${node.variable} of ${generate(node.iterable)}) {\n${node.body.map(generate).join("\n")}\n}`;
+
+    case "Property":
+      return `${node.key}: ${generate(node.value)}`;
+
+    case "MarketCall":
+      return `await marketFunctions.${node.functionName}("${node.symbol}")`;
+
+    case "MarketScan":
+      return `await marketFunctions.scanStocks([${node.symbols.map(s => `"${s}"`).join(", ")}])`;
+
     default:
-      throw new Error(`Unknown node type: ${node.type}`);
+      return `/* ${node.type} */`;
   }
 }

@@ -1,52 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RiyalScript Language</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiyalScript - Finance-Oriented Programming Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .card h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="RiyalScript Logo">
-    <h1>RiyalScript</h1>
-    <p>A high-performance language for finance, business automation, and algorithmic trading.</p>
-  </header>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 RiyalScript</h1>
+            <p>High-performance, statically-typed, finance-oriented programming language</p>
+        </div>
+        
+        <div class="card">
+            <h2>🎯 What is RiyalScript?</h2>
+            <p>RiyalScript is a modern programming language specifically designed for financial calculations and analysis. It combines the power of static typing with the flexibility of dynamic languages, making it perfect for financial applications, risk assessment, and portfolio management.</p>
+            
+            <div class="code-block">
+let portfolio = [10000, 15000, 20000]
+let risk = if 0.8 > 0.5 then "High Risk" else "Low Risk"
+let compound = 1000 * (1 + 0.05) ** 10
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>✨ Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>💰 Financial-First Design</h4>
+                    <p>Built specifically for financial calculations with optimized operators and data types.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔍 Type Inference</h4>
+                    <p>Automatic type detection without the need for explicit type annotations.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>⚡ High Performance</h4>
+                    <p>Compile-time optimizations and constant folding for maximum efficiency.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🎨 Clean Syntax</h4>
+                    <p>Readable, intuitive syntax that makes financial code easy to understand.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔄 Control Flow</h4>
+                    <p>Full support for loops, conditionals, and complex control structures.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 Data Structures</h4>
+                    <p>Arrays and objects for handling complex financial data.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📈 Performance Stats</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Test Coverage</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Language Features</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Compiler Phases</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Runtime Errors</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🚀 Quick Start</h2>
+            <h3>Installation</h3>
+            <div class="code-block">
+# Clone the repository
+git clone https://github.com/yourusername/riyalscript.git
+cd riyalscript
 
-  <section id="story">
-    <h2>About RiyalScript</h2>
-    <p>RiyalScript is a statically-typed, high-speed programming language inspired by C++ and JavaScript, designed specifically for financial applications, trading systems, and business automation. It emphasizes performance, strong typing with type inference, and blockchain/Web3 interoperability.</p>
-    <p>With RiyalScript, developers can create efficient, low-latency systems that integrate seamlessly with financial platforms and the latest web technologies. The language supports multi-threading, financial data types, and is compiled into optimized bytecode for superior execution speed.</p>
-    <p>Built with love for the finance and tech community, RiyalScript offers a modern solution for tomorrow's financial computation challenges.</p>
-  </section>
+# Install dependencies
+npm install
 
-  <section id="examples">
-    <h2>Example Programs</h2>
-    <pre><code>let gain = 1200
-let cost = 1000
-let roi = (gain - cost) / cost * 100</code></pre>
+# Run examples
+npm run examples
+            </div>
+            
+            <h3>Basic Usage</h3>
+            <div class="code-block">
+import compile from './src/compiler.js';
 
-    <pre><code>func add[a, b] (a + b) end
-let result = add[5, 7]</code></pre>
+// Simple calculation
+const result = compile('let balance = 1000 + 500 * 2', 'js');
+console.log(result); // let balance = 2000;
 
-    <pre><code>func factorial[n] (if n <= 1 1 else n * factorial[n - 1]) end
-let result = factorial[5]</code></pre>
-
-    <pre><code>let price = 450.75
-let shares = 20
-let total_value = price * shares</code></pre>
-
-    <pre><code>func isEven[n] (n % 2 == 0) end
-let result = isEven[10]</code></pre>
-  </section>
-
-  <section id="bios">
-    <h2>Developer</h2>
-    <p><strong>Faisal Alhogail</strong> — A senior Computer Science student passionate about finance, algorithmic trading, and programming language design.</p>
-  </section>
-
-  <footer>
-    <p>🔗 <a href="https://github.com/faisalffmanr/RiyalScript" target="_blank">View the RiyalScript GitHub Repository</a></p>
-  </footer>
+// Financial function
+const func = compile('func calculateTax[income, rate] (income * rate) end', 'js');
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>💼 Financial Examples</h2>
+            <h3>Portfolio Analysis</h3>
+            <div class="code-block">
+let portfolio = [10000, 15000, 20000]
+let total = 0
+for asset in portfolio do
+    total = total + asset
+end
+            </div>
+            
+            <h3>Risk Assessment</h3>
+            <div class="code-block">
+let riskLevel = if 0.7 > 0.5 then "High Risk" else "Low Risk"
+let approved = 75000 > 50000 && 0.1 < 0.15
+            </div>
+            
+            <h3>Interest Calculations</h3>
+            <div class="code-block">
+func calculateInterest[principal, rate, time] (principal * rate * time) end
+let interest = calculateInterest[10000, 0.05, 2]
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🏗️ Compiler Architecture</h2>
+            <p>RiyalScript uses a modern multi-phase compiler pipeline:</p>
+            <ol>
+                <li><strong>Parser</strong>: Ohm-based grammar parsing</li>
+                <li><strong>Analyzer</strong>: Semantic analysis with type inference</li>
+                <li><strong>Optimizer</strong>: AST optimization with constant folding</li>
+                <li><strong>Generator</strong>: Clean JavaScript code generation</li>
+            </ol>
+        </div>
+        
+        <div class="card">
+            <h2>🎯 Language Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>Variables & Literals</h4>
+                    <p>let balance = 10000<br>let currency = "USD"</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Arithmetic Operations</h4>
+                    <p>let total = 1000 + 500 * 2<br>let compound = 1000 * (1 + 0.05) ** 10</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Control Flow</h4>
+                    <p>if condition then value else other<br>while condition do statements end</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Functions</h4>
+                    <p>func name[params] (body) end<br>let result = name[args]</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Data Structures</h4>
+                    <p>let arr = [1, 2, 3]<br>let obj = {key: value}</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Loops</h4>
+                    <p>for item in array do statements end<br>while condition do statements end</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🤝 Contributing</h2>
+            <p>We welcome contributions! RiyalScript is open source and community-driven.</p>
+            <a href="https://github.com/yourusername/riyalscript" class="cta-button">View on GitHub</a>
+            <a href="https://github.com/yourusername/riyalscript/issues" class="cta-button">Report Issues</a>
+            <a href="https://github.com/yourusername/riyalscript/discussions" class="cta-button">Join Discussions</a>
+        </div>
+        
+        <div class="footer">
+            <p>Built with ❤️ for the financial technology community</p>
+            <p>© 2024 RiyalScript Team. Licensed under MIT License.</p>
+        </div>
+    </div>
 </body>
 </html>

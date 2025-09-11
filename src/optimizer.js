@@ -30,20 +30,59 @@ export default function optimize(node) {
         args: node.args.map(optimize)
       };
 
+    case "ArrayLiteral":
+      return {
+        ...node,
+        elements: node.elements.map(optimize)
+      };
+
+    case "ObjectLiteral":
+      return {
+        ...node,
+        properties: node.properties.map(optimize)
+      };
+
+    case "WhileLoop":
+      return {
+        ...node,
+        condition: optimize(node.condition),
+        body: node.body.map(optimize)
+      };
+
+    case "ForLoop":
+      return {
+        ...node,
+        iterable: optimize(node.iterable),
+        body: node.body.map(optimize)
+      };
+
     case "BinaryExpression": {
       const left = optimize(node.left);
       const right = optimize(node.right);
 
       if (left.type === "NumberLiteral" && right.type === "NumberLiteral") {
-        let result;
+      let result;
         switch (node.op) {
           case "+": result = left.value + right.value; break;
           case "-": result = left.value - right.value; break;
           case "*": result = left.value * right.value; break;
           case "/": result = left.value / right.value; break;
           case "%": result = left.value % right.value; break;
+          case "**": result = Math.pow(left.value, right.value); break;
+          case ">": result = left.value > right.value; break;
+          case "<": result = left.value < right.value; break;
+          case ">=": result = left.value >= right.value; break;
+          case "<=": result = left.value <= right.value; break;
+          case "==": result = left.value === right.value; break;
+          case "!=": result = left.value !== right.value; break;
+          case "&&": result = left.value && right.value; break;
+          case "||": result = left.value || right.value; break;
           default:
             throw new Error(`Unknown binary operator: ${node.op}`);
+        }
+        // Return appropriate type based on operator
+        if (['>', '<', '>=', '<=', '==', '!=', '&&', '||'].includes(node.op)) {
+          return { type: "BooleanLiteral", value: result };
         }
         return { type: "NumberLiteral", value: result };
       }
@@ -70,9 +109,16 @@ export default function optimize(node) {
     case "Identifier":
     case "NumberLiteral":
     case "StringLiteral":
+    case "FunctionCall":
+    case "BinaryExpression":
+    case "UnaryExpression":
+    case "ConditionalExpression":
+    case "MarketCall":
+    case "MarketScan":
       return node;
 
     default:
-      throw new Error(`Unknown node type: ${node.type}`);
+      console.log(`Unknown node type: ${node.type}`, node);
+      return node;
   }
 }

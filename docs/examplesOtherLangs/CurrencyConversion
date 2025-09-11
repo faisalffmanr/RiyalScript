@@ -1,3 +1,0 @@
-let sar = 1000
-let usdRate = 0.27
-let usd = sar * usdRate

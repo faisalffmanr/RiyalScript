@@ -1,0 +1,133 @@
+RiyalScript {
+  Program = Statement+
+
+  Statement = 
+      FuncDecl 
+    | VarDecl 
+    | AssignStmt 
+    | IfStmt 
+    | WhileStmt 
+    | ForStmt 
+    | CallStmt 
+    | ClassDecl 
+    | ImportStmt 
+    | ReturnStmt
+    | BlockStmt
+
+  FuncDecl = "async"? "func" id "(" Params ")" ":"? Type? "{" FuncBody "}"
+  Params = ListOf<Param, ",">
+  Param = id ":" Type
+  FuncBody = ListOf<Statement, ";">
+  ReturnStmt = "return" Expression? ";"
+
+  VarDecl = "let" id ":" Type "=" Expression ";"
+  AssignStmt = id "=" Expression ";"
+
+  IfStmt = "if" Expression "{" IfBody "}" ("else" "{" IfBody "}")?
+  IfBody = ListOf<Statement, ";">
+  WhileStmt = "while" Expression "{" WhileBody "}"
+  WhileBody = ListOf<Statement, ";">"
+  ForStmt = "for" id "in" Expression "{" ForBody "}"
+  ForBody = ListOf<Statement, ";">"
+
+  CallStmt = Call ";"
+  Call = id "(" Args ")"
+  Args = ListOf<Expression, ",">
+
+  ClassDecl = "class" id "{" ClassBody "}"
+  ClassBody = ListOf<ClassMember, ";">
+  ClassMember = MethodDecl | FieldDecl
+  MethodDecl = "func" id "(" Params ")" ":"? Type? "{" FuncBody "}"
+  FieldDecl = "field" id ":" Type "=" Expression ";"
+
+  ImportStmt = "import" ImportSpec "from" str ";"
+  ImportSpec = ImportDefault | ImportNamed | ImportNamespace
+  ImportDefault = id
+  ImportNamed = "{" ListOf<ImportNamedItem, ","> "}"
+  ImportNamedItem = ImportNamedItemSimple | ImportNamedItemAliased
+  ImportNamedItemSimple = id
+  ImportNamedItemAliased = id "as" id
+  ImportNamespace = "*" "as" id
+
+  BlockStmt = "{" ListOf<Statement, ";"> "}"
+
+  Type = "number" | "string" | "boolean" | "Currency" | "Decimal" | "InterestRate" | "void" | id
+
+  Expression = LogicalOrExpr
+
+  LogicalOrExpr = LogicalOrChain | LogicalAndExpr
+  LogicalOrChain = LogicalAndExpr "||" LogicalOrExpr
+
+  LogicalAndExpr = LogicalAndChain | EqualityExpr
+  LogicalAndChain = EqualityExpr "&&" LogicalAndExpr
+
+  EqualityExpr = EqualityChain | ComparisonExpr
+  EqualityChain = ComparisonExpr ("==" | "!=") EqualityExpr
+
+  ComparisonExpr = ComparisonChain | AddExpr
+  ComparisonChain = AddExpr (">" | "<" | ">=" | "<=") AddExpr
+
+  AddExpr = AddChain | MulExpr
+  AddChain = AddExpr ("+" | "-") MulExpr
+
+  MulExpr = MulChain | PowExpr
+  MulChain = MulExpr ("*" | "/" | "%") PowExpr
+
+  PowExpr = PowChain | UnaryExpr
+  PowChain = UnaryExpr "**" PowExpr
+
+  UnaryExpr = UnaryChain | PostfixExpr
+  UnaryChain = ("!" | "-" | "+") UnaryExpr
+
+  PostfixExpr = PostfixChain | PrimaryExpr
+  PostfixChain = FactorialExpr | MemberAccessExpr
+  FactorialExpr = PostfixExpr "!"
+  MemberAccessExpr = PostfixExpr "." id
+
+  PrimaryExpr =
+      IfExpr
+    | CurrencyLiteral
+    | DecimalLiteral
+    | InterestRateLiteral
+    | NumberLiteral
+    | StringLiteral
+    | BooleanLiteral
+    | Call
+    | NewExpr
+    | id
+    | Grouped
+    | ArrayLiteral
+    | ObjectLiteral
+
+  IfExpr = "if" Expression "then" Expression "else" Expression
+
+  NewExpr = "new" id "(" Args ")"
+
+  Grouped = "(" Expression ")"
+
+  NumberLiteral = num
+  StringLiteral = str
+  BooleanLiteral = bool
+  CurrencyLiteral = num CurrencyCode
+  DecimalLiteral = num "D"
+  InterestRateLiteral = num "%"
+
+  CurrencyCode = "USD" | "EUR" | "GBP" | "JPY" | "CAD" | "AUD" | "CHF" | "CNY" | "SAR" | "AED" | "QAR" | "KWD" | "BHD" | "OMR"
+
+  ArrayLiteral = "[" ListOf<Expression, ","> "]"
+  ObjectLiteral = "{" ListOf<Property, ","> "}"
+  Property = id ":" Expression
+
+  id = firstChar remainingChars*
+  firstChar = letter | "_"
+  remainingChars = letter | digit | "_"
+
+  num = digit+ ("." digit+)?
+
+  str = "\"" strChar* "\""
+  strChar = ~("\"" | "\\") any | "\\" any
+
+  bool = "true" | "false"
+
+  keyword = "func" | "let" | "if" | "else" | "while" | "for" | "in" | "return" | "class" | "field" | "import" | "from" | "as" | "new" | "async" | "await" | "true" | "false" | "void"
+}

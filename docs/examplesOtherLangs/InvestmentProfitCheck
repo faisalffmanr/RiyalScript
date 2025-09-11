@@ -1,4 +1,0 @@
-let cost = 150.0
-let sell = 190.0
-let profit = sell - cost
-let status = "Profit" if profit > 0 else "Loss"

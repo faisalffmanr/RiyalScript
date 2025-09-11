@@ -1,6 +1,0 @@
-let yesterday = 120.0
-let today = 105.0
-let drop = yesterday - today
-let warning = "Alert" if drop > 10 else "Stable"
-
-/* when price drops it warns the user*/

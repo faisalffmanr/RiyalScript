@@ -1,9 +1,9 @@
 RiyalScript {
   Program = Statement+
 
-  Statement = FuncDecl | VarDecl | AssignStmt
+  Statement = FuncDecl | VarDecl | AssignStmt | WhileStmt | ForStmt
 
-  FuncDecl = "func" id "[" Params "]" "(" ExpBlock ")" "end"
+  FuncDecl = "func" id "[" Params "]" "(" ExpBlock? ")" "end"
   Params = ListOf<id, ",">
 
   ExpBlock = NonemptyListOf<TopExpr, ";">
@@ -12,15 +12,33 @@ RiyalScript {
   VarDecl = "let" id "=" Expression
   AssignStmt = id "=" Expression
 
-  Expression = IfExpr | AddExpr
+  WhileStmt = "while" Expression "do" StmtBlock "end"
+  ForStmt = "for" id "in" Expression "do" StmtBlock "end"
 
-  IfExpr = "if" Expression Expression "else" Expression
+  StmtBlock = NonemptyListOf<Statement, ";">
+
+  Expression = IfExpr | LogicalOrExpr
+
+  IfExpr = "if" Expression "then" Expression "else" Expression
+
+  LogicalOrExpr = LogicalOrChain | LogicalAndExpr
+  LogicalOrChain = LogicalAndExpr "||" LogicalOrExpr
+
+  LogicalAndExpr = LogicalAndChain | ComparisonExpr
+  LogicalAndChain = ComparisonExpr "&&" LogicalAndExpr
+
+  ComparisonExpr = ComparisonChain | AddExpr
+  ComparisonChain = AddExpr ComparisonOp AddExpr
+  ComparisonOp = ">=" | "<=" | "==" | "!=" | ">" | "<"
 
   AddExpr = AddChain | MulExpr
   AddChain = AddExpr ("+" | "-") MulExpr
 
-  MulExpr = MulChain | UnaryExpr
-  MulChain = MulExpr ("*" | "/" | "%") UnaryExpr
+  MulExpr = MulChain | PowExpr
+  MulChain = MulExpr ("*" | "/" | "%") PowExpr
+
+  PowExpr = PowChain | UnaryExpr
+  PowChain = UnaryExpr "**" PowExpr
 
   UnaryExpr = Negate | PostfixExpr
   Negate = "-" PrimaryExpr
@@ -32,14 +50,24 @@ RiyalScript {
       IfExpr
     | num
     | str
+    | ArrayLiteral
+    | ObjectLiteral
     | Call
     | id
     | Grouped
 
+  ArrayLiteral = "[" ListOf<Expression, ","> "]"
+  ObjectLiteral = "{" ListOf<Property, ","> "}"
+  Property = id ":" Expression
+
   Grouped = "(" Expression ")"
 
-  Call = id "[" Args "]"
+  Call = FuncCall | MarketCall
+  FuncCall = id "[" Args "]"
   Args = ListOf<Expression, ",">
+
+  MarketCall = "market" "." id "(" Symbol ")"
+  Symbol = "\"" id "\""
 
   id = ~keyword (letter | "@" | "_") idchar*
   idchar = alnum | "_" | "@" | "$"

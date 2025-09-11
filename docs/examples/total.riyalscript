@@ -1,3 +1,0 @@
-let stockA = 50 * 31.5
-let stockB = 120 * 12.2
-let total = stockA + stockB

@@ -1,3 +1,0 @@
-let bought = 220.0
-let current = 198.5
-let change = ((current - bought) / bought) * 100

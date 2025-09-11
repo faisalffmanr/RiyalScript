@@ -41,3 +41,28 @@ export function number(value) {
 export function string(value) {
   return { type: "StringLiteral", value };
 }
+
+export function array(elements) {
+  return { type: "ArrayLiteral", elements };
+}
+
+export function whileLoop(condition, body) {
+  return { type: "WhileLoop", condition, body };
+}
+
+export function forLoop(variable, iterable, body) {
+  return { type: "ForLoop", variable, iterable, body };
+}
+
+export function object(properties) {
+  return { type: "ObjectLiteral", properties };
+}
+
+// Market data functions
+export function marketCall(functionName, symbol) {
+  return { type: "MarketCall", functionName, symbol };
+}
+
+export function marketScan(symbols) {
+  return { type: "MarketScan", symbols };
+}

@@ -1,4 +1,0 @@
-let P = 100000
-let r = 0.05 / 12
-let n = 30 * 12
-let payment = P * r * (1 + r) ** n / ((1 + r) ** n - 1)

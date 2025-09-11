@@ -1,3 +1,0 @@
-let shares = 50
-let price = 45.75
-let value = shares * price

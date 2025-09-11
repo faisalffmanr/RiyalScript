@@ -1,4 +1,0 @@
-func add[a, b] (a + b) end
-
-let sum = add(3, 4)
-//// this is comment
