@@ -60,27 +60,29 @@ export default function optimize(node) {
       const left = optimize(node.left);
       const right = optimize(node.right);
 
-      if (left.type === "NumberLiteral" && right.type === "NumberLiteral") {
-      let result;
+      if ((left.type === "NumberLiteral" && right.type === "NumberLiteral") ||
+          (left.type === "BooleanLiteral" && right.type === "BooleanLiteral")) {
+        let result;
         switch (node.op) {
-          case "+": result = left.value + right.value; break;
-          case "-": result = left.value - right.value; break;
-          case "*": result = left.value * right.value; break;
-          case "/": result = left.value / right.value; break;
-          case "%": result = left.value % right.value; break;
+          case "+":  result = left.value +  right.value; break;
+          case "-":  result = left.value -  right.value; break;
+          case "*":  result = left.value *  right.value; break;
+          case "/":  result = left.value /  right.value; break;
+          case "%":  result = left.value %  right.value; break;
           case "**": result = Math.pow(left.value, right.value); break;
-          case ">": result = left.value > right.value; break;
-          case "<": result = left.value < right.value; break;
+
+          case ">":  result = left.value >  right.value; break;
+          case "<":  result = left.value <  right.value; break;
           case ">=": result = left.value >= right.value; break;
           case "<=": result = left.value <= right.value; break;
           case "==": result = left.value === right.value; break;
           case "!=": result = left.value !== right.value; break;
-          case "&&": result = left.value && right.value; break;
-          case "||": result = left.value || right.value; break;
+          case "&&": result = left.value &&  right.value; break;
+          case "||": result = left.value ||  right.value; break;
+
           default:
             throw new Error(`Unknown binary operator: ${node.op}`);
         }
-        // Return appropriate type based on operator
         if (['>', '<', '>=', '<=', '==', '!=', '&&', '||'].includes(node.op)) {
           return { type: "BooleanLiteral", value: result };
         }
@@ -105,7 +107,6 @@ export default function optimize(node) {
         consequent: optimize(node.consequent),
         alternate: optimize(node.alternate)
       };
-
     case "Identifier":
     case "NumberLiteral":
     case "StringLiteral":
@@ -118,7 +119,6 @@ export default function optimize(node) {
       return node;
 
     default:
-      console.log(`Unknown node type: ${node.type}`, node);
       return node;
   }
 }

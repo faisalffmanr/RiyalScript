@@ -1,11 +1,9 @@
-// Market Data Integration for RiyalScript
 import https from 'https';
-import http from 'http';
 
 class MarketDataAPI {
   constructor() {
     this.cache = new Map();
-    this.cacheTimeout = 60000; // 1 minute cache
+    this.cacheTimeout = 60000;
   }
 
   async fetchStockData(symbol) {
@@ -17,12 +15,8 @@ class MarketDataAPI {
     }
 
     try {
-      // Using Alpha Vantage API (free tier)
       const data = await this.fetchFromAlphaVantage(symbol);
-      this.cache.set(cacheKey, {
-        data,
-        timestamp: Date.now()
-      });
+      this.cache.set(cacheKey, { data, timestamp: Date.now() });
       return data;
     } catch (error) {
       console.error(`Error fetching data for ${symbol}:`, error.message);
@@ -70,7 +64,6 @@ class MarketDataAPI {
 
   async fetch52WeekHigh(symbol) {
     try {
-      // Using Alpha Vantage for 52-week data
       const data = await this.fetchFromAlphaVantageWeekly(symbol);
       return data;
     } catch (error) {
@@ -97,7 +90,7 @@ class MarketDataAPI {
               return;
             }
 
-            const weeks = Object.keys(timeSeries).slice(0, 52); // Last 52 weeks
+            const weeks = Object.keys(timeSeries).slice(0, 52);
             const prices = weeks.map(week => parseFloat(timeSeries[week]['2. high']));
             const maxPrice = Math.max(...prices);
             const minPrice = Math.min(...prices);
@@ -107,7 +100,7 @@ class MarketDataAPI {
               week52High: maxPrice,
               week52Low: minPrice,
               currentPrice: parseFloat(timeSeries[weeks[0]]['4. close']),
-              isAt52WeekHigh: parseFloat(timeSeries[weeks[0]]['4. close']) >= maxPrice * 0.99, // 99% threshold
+              isAt52WeekHigh: parseFloat(timeSeries[weeks[0]]['4. close']) >= maxPrice * 0.99,
               weeksAnalyzed: weeks.length
             });
           } catch (error) {
@@ -128,7 +121,9 @@ class MarketDataAPI {
       week52High: data.week52High,
       isAllTimeHigh: data.isAt52WeekHigh,
       percentageFromHigh: ((data.currentPrice - data.week52High) / data.week52High * 100).toFixed(2),
-      alert: data.isAt52WeekHigh ? `🚀 ${symbol} is at/near 52-week high!` : `${symbol} is ${data.percentageFromHigh}% from 52-week high`
+      alert: data.isAt52WeekHigh
+        ? `${symbol} is at/near 52-week high!`
+        : `${symbol} is ${data.percentageFromHigh}% from 52-week high`
     };
   }
 
@@ -136,20 +131,15 @@ class MarketDataAPI {
     const results = [];
     for (const symbol of symbols) {
       const result = await this.checkAllTimeHigh(symbol);
-      if (result) {
-        results.push(result);
-      }
-      // Add delay to respect API rate limits
-      await new Promise(resolve => setTimeout(resolve, 200));
+      if (result) results.push(result);
+      await new Promise(resolve => setTimeout(resolve, 200)); 
     }
     return results;
   }
 }
 
-// Export singleton instance
 export const marketAPI = new MarketDataAPI();
 
-// Built-in RiyalScript functions for market data
 export const marketFunctions = {
   getStockPrice: async (symbol) => {
     const data = await marketAPI.fetchStockData(symbol);

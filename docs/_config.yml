@@ -1,0 +1,25 @@
+title: RiyalScript
+description: A high-performance, statically-typed, finance-oriented programming language
+baseurl: /riyalscript
+url: https://faisalffmanr.github.io
+
+# GitHub Pages settings
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Site settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Examples
+    url: /examples/
+  - title: Documentation
+    url: /docs/
+  - title: GitHub
+    url: https://github.com/faisalffmanr/riyalscript

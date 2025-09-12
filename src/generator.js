@@ -40,7 +40,10 @@ export default function generate(node) {
       return `[${node.elements.map(generate).join(", ")}]`;
 
     case "ObjectLiteral":
-      const props = node.properties.map(prop => `${prop.key}: ${generate(prop.value)}`).join(", ");
+      const props = node.properties
+        .filter(prop => prop && prop.type === "Property")
+        .map(prop => `${prop.key}: ${generate(prop.value)}`)
+        .join(", ");
       return `{${props}}`;
 
     case "WhileLoop":

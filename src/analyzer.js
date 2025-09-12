@@ -1,5 +1,5 @@
-import * as core from "./core.js"
-import { grammar } from "./parser.js"
+import * as core from "./core.js"        
+import { grammar } from "./parser.js"   
 
 class Context {
   constructor(parent = null) {
@@ -55,7 +55,6 @@ export default function analyze(match) {
       let bodyStatements = []
       if (body) {
         const analyzed = body.analyze()
-        // Flatten nested arrays from ExpBlock
         bodyStatements = Array.isArray(analyzed) ? analyzed.flat() : [analyzed]
       }
       return core.funcDecl(name.sourceString, paramNames, bodyStatements)
@@ -90,98 +89,54 @@ export default function analyze(match) {
       return core.conditional(condExpr, thenBranch, elseBranch)
     },
 
-    ComparisonExpr(expr) {
-      return expr.analyze()
-    },
-
     ComparisonChain(left, op, right) {
       const leftExpr = left.analyze()
       const rightExpr = right.analyze()
-      return {
-        ...core.binary(op.sourceString, leftExpr, rightExpr),
-        inferredType: "boolean"
-      }
-    },
-
-    LogicalOrExpr(expr) {
-      return expr.analyze()
+      return { ...core.binary(op.sourceString, leftExpr, rightExpr), inferredType: "boolean" }
     },
 
     LogicalOrChain(left, _op, right) {
       const leftExpr = left.analyze()
       const rightExpr = right.analyze()
-      return {
-        ...core.binary("||", leftExpr, rightExpr),
-        inferredType: "boolean"
-      }
-    },
-
-    LogicalAndExpr(expr) {
-      return expr.analyze()
+      return { ...core.binary("||", leftExpr, rightExpr), inferredType: "boolean" }
     },
 
     LogicalAndChain(left, _op, right) {
       const leftExpr = left.analyze()
       const rightExpr = right.analyze()
-      return {
-        ...core.binary("&&", leftExpr, rightExpr),
-        inferredType: "boolean"
-      }
+      return { ...core.binary("&&", leftExpr, rightExpr), inferredType: "boolean" }
     },
 
     AddChain(left, op, right) {
       const leftExpr = left.analyze()
       const rightExpr = right.analyze()
-      return {
-        ...core.binary(op.sourceString, leftExpr, rightExpr),
-        inferredType: inferBinaryType(leftExpr, rightExpr)
-      }
+      return { ...core.binary(op.sourceString, leftExpr, rightExpr), inferredType: inferBinaryType(leftExpr, rightExpr) }
     },
 
     MulChain(left, op, right) {
       const leftExpr = left.analyze()
       const rightExpr = right.analyze()
-      return {
-        ...core.binary(op.sourceString, leftExpr, rightExpr),
-        inferredType: inferBinaryType(leftExpr, rightExpr)
-      }
-    },
-
-    PowExpr(expr) {
-      return expr.analyze()
+      return { ...core.binary(op.sourceString, leftExpr, rightExpr), inferredType: inferBinaryType(leftExpr, rightExpr) }
     },
 
     PowChain(left, _op, right) {
       const leftExpr = left.analyze()
       const rightExpr = right.analyze()
-      return {
-        ...core.binary("**", leftExpr, rightExpr),
-        inferredType: "number"
-      }
+      return { ...core.binary("**", leftExpr, rightExpr), inferredType: "number" }
     },
 
     Negate(_dash, expr) {
       const subExpr = expr.analyze()
-      return {
-        ...core.unary("-", subExpr),
-        inferredType: "number"
-      }
+      return { ...core.unary("-", subExpr), inferredType: "number" }
     },
 
     PostfixChain(expr, _bang) {
       const subExpr = expr.analyze()
-      return {
-        ...core.unary("!", subExpr),
-        inferredType: "boolean"
-      }
+      return { ...core.unary("!", subExpr), inferredType: "boolean" }
     },
 
     Grouped(_open, expr, _close) {
       return expr.analyze()
-    },
-
-    Call(call) {
-      return call.analyze()
     },
 
     FuncCall(name, _lbrack, args, _rbrack) {
@@ -194,81 +149,25 @@ export default function analyze(match) {
     },
 
     num(_digits, _dot, _frac, _e, _sign, _exp) {
-      return {
-        ...core.number(this.sourceString),
-        inferredType: "number"
-      }
+      return { ...core.number(this.sourceString), inferredType: "number" }
     },
 
     str(_open, chars, _close) {
-      return {
-        ...core.string(this.sourceString.slice(1, -1)),
-        inferredType: "string"
-      }
-    },
-
-    Params(params) {
-      return params.children.map(p => p.sourceString)
-    },
-
-    Args(args) {
-      if (args.children.length === 0) return [];
-      const result = args.children.map(a => a.analyze());
-      // Flatten nested arrays
-      return result.flat();
-    },
-
-    ExpBlock(exps) {
-      const results = exps.children.map(e => e.analyze())
-      // Flatten any nested arrays
-      return results.flat()
-    },
-
-    StmtBlock(stmts) {
-      const results = stmts.children.map(s => s.analyze())
-      // Flatten any nested arrays
-      return results.flat()
-    },
-
-    NonemptyListOf(items, _sep, _rest) {
-      return items.children.map(item => item.analyze())
-    },
-
-    ListOf(items) {
-      if (items.children.length === 0) return [];
-      return items.children.map(item => item.analyze())
-    },
-
-    _iter(...items) {
-      return items.map(item => item.analyze())
-    },
-
-    _terminal() {
-      return this.sourceString
+      return { ...core.string(this.sourceString.slice(1, -1)), inferredType: "string" }
     },
 
     ArrayLiteral(_open, elements, _close) {
       const elementList = elements ? elements.analyze() : []
-      return {
-        ...core.array(elementList),
-        inferredType: "array"
-      }
+      return { ...core.array(elementList), inferredType: "array" }
     },
 
     ObjectLiteral(_open, properties, _close) {
       const propertyList = properties ? properties.analyze() : []
-      return {
-        ...core.object(propertyList),
-        inferredType: "object"
-      }
+      return { ...core.object(propertyList), inferredType: "object" }
     },
 
     Property(key, _colon, value) {
-      return {
-        type: "Property",
-        key: key.sourceString,
-        value: value.analyze()
-      }
+      return { type: "Property", key: key.sourceString, value: value.analyze() }
     },
 
     MarketCall(_market, _dot, functionName, _open, symbol, _close) {
@@ -277,13 +176,41 @@ export default function analyze(match) {
 
     Symbol(_open, symbol, _close) {
       return symbol.sourceString
+    },
+    NonemptyListOf(_first, _separator, _rest) {
+      const elements = [_first.analyze()]
+      for (let i = 0; i < _rest.numChildren; i++) {
+        elements.push(_rest.child(i).analyze())
+      }
+      return elements
+    },
+
+    ListOf(_items) {
+      if (_items.numChildren === 0) return []
+      const elements = []
+      for (let i = 0; i < _items.numChildren; i++) {
+        elements.push(_items.child(i).analyze())
+      }
+      return elements
+    },
+
+    _iter(...children) {
+      const elements = []
+      for (let child of children) {
+        elements.push(child.analyze())
+      }
+      return elements
+    },
+
+    _terminal() {
+      return this.sourceString
     }
   })
 
-  return semantics(match).analyze()
+  return semantics(match).analyze()     // Run analysis on the parse tree
 }
 
-// type inferencef
+// Helper to guess type of binary operations
 function inferBinaryType(left, right) {
   const t1 = left.inferredType
   const t2 = right.inferredType

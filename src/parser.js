@@ -1,18 +1,23 @@
-//this was me trying things don't bother looking yet
+import * as ohm from 'ohm-js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-import * as fs from "node:fs/promises";
-import * as ohm from "ohm-js";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const grammarPath = new URL("./RiyalScript.ohm", import.meta.url);
-const grammarSource = await fs.readFile(grammarPath, "utf-8");
-const grammar = ohm.grammar(grammarSource);
+const grammarPath = path.join(__dirname, 'riyalscript.ohm');
+const grammarSource = fs.readFileSync(grammarPath, 'utf8');
 
-export { grammar };
+export const grammar = ohm.grammar(grammarSource);
 
 export function parse(sourceCode) {
   const matchResult = grammar.match(sourceCode);
+
   if (matchResult.failed()) {
-    throw new Error(`Syntax Error:\n${matchResult.message}`);
+    const error = matchResult.message;
+    throw new Error(`Syntax Error:\n${error}`);
   }
+
   return matchResult;
 }

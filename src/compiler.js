@@ -2,10 +2,9 @@ import { parse } from "./parser.js"
 import analyze from "./analyzer.js"
 import optimize from "./optimizer.js"
 import generate from "./generator.js"
-import run from "./run.js"
 
 export default function compile(source, outputType) {
-  if (!["parsed", "analyzed", "optimized", "js", "run"].includes(outputType)) {
+  if (!["parsed", "analyzed", "optimized", "js"].includes(outputType)) {
     throw new Error("Unknown output type")
   }
 
@@ -19,10 +18,6 @@ export default function compile(source, outputType) {
 
   if (outputType === "analyzed") {
     return analyzed
-  }
-
-  if (outputType === "run") {
-    return run(analyzed)
   }
 
   const optimized = optimize(analyzed)
