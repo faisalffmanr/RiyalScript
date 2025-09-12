@@ -61,14 +61,14 @@ RiyalScript/
 │   ├── market_analysis.rs
 │   └── tax_calculator.rs
 ├── src/
-│   ├── riyalscript.ohm      # Grammar definition
-│   ├── parser.js            # Parser implementation
-│   ├── analyzer.js          # Semantic analysis
-│   ├── optimizer.js         # AST optimization
-│   ├── generator.js         # Code generation
-│   ├── compiler.js          # Main pipeline
-│   ├── core.js              # Core utilities
-│   ├── riyalscript.js       # Main language interface
+│   ├── riyalscript.ohm      
+│   ├── parser.js            
+│   ├── analyzer.js          
+│   ├── optimizer.js        
+│   ├── generator.js        
+│   ├── compiler.js          
+│   ├── core.js              
+│   ├── riyalscript.js       
 │   └── market.js            # Market data integration
 └── test/
     ├── analyzer.test.js
@@ -159,11 +159,3 @@ npm test
 npm run build
 ```
 
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Links
-
-- **Documentation**: [GitHub Pages](https://faisalffmanr.github.io/riyalscript)
-- **Issues**: [GitHub Issues](https://github.com/faisalffmanr/riyalscript/issues)
