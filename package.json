@@ -5,9 +5,8 @@
   "main": "src/compiler.js",
   "type": "module",
   "scripts": {
-    "test": "node test_compiler.js && node advanced_features_test.js && node final_showcase.js",
+    "test": "node --test test/*.test.js",
     "build": "echo 'Build complete - RiyalScript compiler is ready!'",
-    "examples": "node final_showcase.js",
     "dev": "node -e \"import compile from './src/compiler.js'; console.log('RiyalScript Compiler v1.0.0'); console.log('Try: compile(\\\"let x = 5 + 3\\\", \\\"js\\\")');\""
   },
   "keywords": [
@@ -20,7 +19,7 @@
     "ast",
     "type-inference"
   ],
-  "author": "RiyalScript Team",
+  "author": "Faisal Alhogail",
   "license": "MIT",
   "dependencies": {
     "ohm-js": "^17.1.0"
@@ -30,17 +29,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/riyalscript.git"
+    "url": "https://github.com/faisalffmanr/riyalscript.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/riyalscript/issues"
+    "url": "https://github.com/faisalffmanr/riyalscript/issues"
   },
-  "homepage": "https://yourusername.github.io/riyalscript",
+  "homepage": "https://faisalffmanr.github.io/riyalscript",
   "engines": {
     "node": ">=16.0.0"
   },
   "files": [
     "src/",
+    "test/",
+    "examples/",
     "README.md",
     "LICENSE",
     "package.json"
