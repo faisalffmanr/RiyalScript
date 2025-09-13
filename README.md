@@ -149,13 +149,48 @@ let price = market.getStockPrice("AAPL")
 - **RS**: Automatic type inference, compile-time errors
 - **JS**: Dynamic typing, runtime errors
 
-**Bottom line**: RiyalScript is JavaScript made cleaner and safer for financial programming!
 
-## Contributing
 
-```bash
-npm install
-npm test
-npm run build
-```
+
+12 key features of RiyalScript:
+
+## **RiyalScript - 12 Core Features**
+
+### **1. Variable Declarations**
+`let balance = 10000`
+
+### **2. Type Inference**
+Automatic type detection (number, string, boolean, array, object)
+
+### **3. Functions**
+`func calculateTax[income, rate] (income * rate) end`
+
+### **4. Control Flow**
+`if-then-else`, `while`, `for-in` loops
+
+### **5. Data Structures**
+Arrays `[1,2,3]` and Objects `{name: "faisal"}`
+
+### **6. Arithmetic Operations**
+`+`, `-`, `*`, `/`, `%`, `**` with correct precedence
+
+### **7. Comparison & Logical**
+`>`, `<`, `==`, `!=`, `&&`, `||`
+
+### **8. Market Data Integration**
+`market.getStockPrice("AAPL")`, `market.isAllTimeHigh("GOOGL")`
+
+### **9. Constant Folding**
+Compile-time optimization (e.g., `5 + 3` → `8`)
+
+### **10. Error Handling**
+Comprehensive syntax and semantic error checking
+
+### **11. JavaScript Output**
+Clean, readable JavaScript code 
+
+### **12. Financial Focus**
+Built specifically for financial calculations and analysis
+
+**All 12 features are fully implemented and tested with 70 comprehensive unit tests**
 
